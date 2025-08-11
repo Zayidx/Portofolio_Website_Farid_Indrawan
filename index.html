@@ -237,7 +237,6 @@
         .back-to-top.visible { opacity: 1; visibility: visible; }
         .back-to-top:hover { background: var(--accent-color-darker); transform: translateY(-3px); }
         footer { background: var(--bg-dark); color: #888; text-align: center; padding: 2rem 0; border-top: 1px solid #222; }
-        #secret-admin-btn { cursor: pointer; }
 
         /* Cookie Consent */
         .cookie-consent { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-dark); color: white; padding: 1rem; z-index: 1000; transform: translateY(100%); transition: var(--transition); }
@@ -249,29 +248,6 @@
         .cookie-accept { background: var(--accent-color); color: white; }
         .cookie-decline { background: #666; color: white; }
         
-        /* Admin Mode Styles */
-        .admin-controls, .admin-add-btn { display: none; }
-        .admin-mode .admin-controls, .admin-mode .admin-add-btn { display: flex; }
-        .admin-bar { display: none; position: fixed; top: 0; left: 0; width: 100%; background-color: var(--accent-color); color: white; text-align: center; padding: 10px; z-index: 1001; }
-        .admin-mode body { padding-top: 50px; }
-        .admin-mode header { top: 50px; }
-        .admin-mode .admin-bar { display: block; }
-        .admin-controls { position: absolute; top: 10px; right: 10px; z-index: 5; gap: 10px; }
-        .admin-btn { background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .admin-btn:hover { background: rgba(0,0,0,0.8); }
-        .admin-add-btn { margin-left: 1rem; background: var(--accent-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; }
-
-        /* CRUD Modal */
-        .crud-modal { position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; }
-        .crud-modal.show { display: flex; }
-        .crud-modal-content { background: var(--bg-light); color: var(--text-color); padding: 2rem; border-radius: 10px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; }
-        .crud-modal-content h2 { margin-bottom: 1.5rem; }
-        .crud-form-group { margin-bottom: 1rem; }
-        .crud-form-group label { display: block; margin-bottom: 0.5rem; }
-        .crud-form-group input, .crud-form-group textarea, .crud-form-group input[type="file"] { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid var(--border-color); background: var(--bg-medium); color: var(--text-color); }
-        .crud-form-group input[type="file"] { padding: 5px; }
-        .crud-modal-actions { margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem; }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .menu-toggle { display: flex; }
@@ -289,11 +265,6 @@
     </style>
 </head>
 <body data-theme="light">
-    <!-- Admin Bar -->
-    <div class="admin-bar" id="adminBar">
-        Admin Mode Active <button onclick="exitAdminMode()" style="margin-left: 20px; cursor: pointer;">Exit</button>
-    </div>
-
     <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-content">
@@ -395,7 +366,6 @@
         <div class="container">
             <div class="section-title-wrapper" data-aos="fade-up">
                 <h2 class="section-title">My Projects</h2>
-                <button class="admin-add-btn" onclick="openCrudModal('project')">+ Add Project</button>
             </div>
             <div class="project-filters" data-aos="fade-up" data-aos-delay="100">
                 <button class="filter-btn active" data-filter="all">All</button>
@@ -413,7 +383,6 @@
         <div class="container">
             <div class="section-title-wrapper" data-aos="fade-up">
                 <h2 class="section-title">My Certificates</h2>
-                <button class="admin-add-btn" onclick="openCrudModal('certificate')">+ Add Certificate</button>
             </div>
             <div class="gallery-grid" id="galleryGrid" data-aos="fade-up" data-aos-delay="100">
                 <!-- Certificates will be dynamically inserted here by JavaScript -->
@@ -425,7 +394,7 @@
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-title-wrapper" data-aos="fade-up">
-                <h2 class="section-title contact-us">Get In Touch</h2>
+                <h2 class="section-title contact-us" style="color: white;">Get In Touch</h2>
             </div>
             <div class="contact-content" data-aos="zoom-in">
                 <p>I'm always open to discussing new opportunities and interesting projects. Feel free to send me a message!</p>
@@ -443,7 +412,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p><span id="secret-admin-btn">&copy;</span> Copyright 2025 Farid Indrawan</p>
+            <p>&copy; Copyright 2025 Farid Indrawan</p>
         </div>
     </footer>
 
@@ -469,23 +438,6 @@
         </div>
     </div>
 
-    <!-- CRUD Modal -->
-    <div id="crudModal" class="crud-modal">
-        <div class="crud-modal-content">
-            <h2 id="crudModalTitle"></h2>
-            <form id="crudForm">
-                <input type="hidden" id="crudItemId">
-                <input type="hidden" id="crudItemType">
-                <div id="formFields"></div>
-                <div class="crud-modal-actions">
-                    <button type="button" class="cta-button" style="background: #6c757d;" onclick="closeCrudModal()">Cancel</button>
-                    <button type="submit" class="cta-button">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
@@ -505,38 +457,94 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // --- DATA MANAGEMENT (LOCALSTORAGE) ---
-        let projectsData = [];
-        let certificatesData = [];
+        // =================================================================================
+        // --- PORTFOLIO DATA ---
+        // Di sini Anda bisa mengelola data proyek dan sertifikat.
+        // Cukup salin-tempel (copy-paste) blok data dan ubah nilainya.
+        // =================================================================================
 
-        const defaultProjects = [
-            { id: 1, category: 'web', imgSrc: 'lytheria.png', title: 'Community Minecraft Server', description: 'Platform komunitas dengan autentikasi, asisten chat AI, data pemain online, blog, dan dasbor admin. Dibangun dengan teknologi modern untuk performa optimal.', tech: ['Laravel', 'MySQL', 'Tailwind', 'Javascript'], demoLink: 'https://lytheria.xyz', codeLink: 'https://github.com/Zayidx/Web-ServerLytheria' },
-            { id: 2, category: 'web', imgSrc: 'portofolio.png', title: 'Web Portofolio', description: 'Portofolio web dengan desain UI/UX modern dan intuitif, dilengkapi fitur unduh CV, mode terang/gelap, serta integrasi kontak via EmailJS untuk fungsionalitas penuh.', tech: ['HTML', 'CSS', 'JavaScript'], demoLink: 'https://portofolio-website-farid-indrawan.vercel.app/', codeLink: 'https://github.com/Zayidx/Portofolio_Website_Farid_Indrawan' },
-            { id: 3, category: 'web', imgSrc: 'simagang.png', title: 'Sistem Informasi Magang', description: 'Aplikasi untuk mengelola informasi dan proses magang secara efisien. Didesain dengan antarmuka yang modern untuk memudahkan pendaftaran dan pemantauan.', tech: ['HTML', 'CSS', 'JavaScript'], demoLink: '#', codeLink: '#' }
-        ];
-
-        const defaultCertificates = [
-            { id: 1, title: 'Sertifikat Kompetensi BNSP', issuer: 'BNSP', date: 'Issued Jun 2023', description: 'Sertifikasi nasional yang membuktikan kompetensi dalam bidang pemrograman web sesuai standar industri.', driveLink: 'https://docs.google.com/document/d/1exxxxxxxxxxx/', pdfSrc: '', fullSrc: 'https://placehold.co/1200x840/007BFF/FFFFFF?text=Sertifikat+BNSP', thumbSrc: 'https://placehold.co/600x420/007BFF/FFFFFF?text=Sertifikat+BNSP' },
-            { id: 2, title: 'AWS Cloud Practitioner', issuer: 'Dicoding Indonesia', date: 'Completed May 2023', description: 'Menyelesaikan kursus dasar AWS, mencakup pemahaman konsep cloud, layanan inti, dan arsitektur AWS.', driveLink: '', pdfSrc: '', fullSrc: 'https://placehold.co/1200x840/28a745/FFFFFF?text=Sertifikat+AWS', thumbSrc: 'https://placehold.co/600x420/28a745/FFFFFF?text=Sertifikat+AWS' },
-            { id: 3, title: 'Sertifikat Lainnya', issuer: 'Lembaga X', date: 'Issued Jan 2023', description: 'Deskripsi singkat mengenai pencapaian atau keahlian yang divalidasi oleh sertifikat ini.', driveLink: 'https://docs.google.com/document/d/1eyyyyyyyyyyy/', pdfSrc: '', fullSrc: 'https://placehold.co/1200x840/ffc107/000000?text=Sertifikat+Lainnya', thumbSrc: 'https://placehold.co/600x420/ffc107/000000?text=Sertifikat+Lainnya' }
-        ];
-
-        function saveData() {
-            try {
-                localStorage.setItem('projectsData', JSON.stringify(projectsData));
-                localStorage.setItem('certificatesData', JSON.stringify(certificatesData));
-            } catch (e) {
-                console.error("Error saving to localStorage", e);
-                alert("Could not save data. Storage might be full.");
+        // --- DATA PROYEK ---
+        // Untuk menambahkan proyek baru, salin salah satu blok (dari { sampai }), 
+        // tempel di bawahnya, dan ubah nilainya. Pastikan ada koma (,) di antara setiap blok.
+        const projectsData = [
+            { 
+                id: 1, 
+                category: 'web', 
+                imgSrc: 'img/project/lytheria.png', 
+                title: 'Community Minecraft Server', 
+                description: 'Platform komunitas dengan autentikasi, asisten chat AI, data pemain online, blog, dan dasbor admin. Dibangun dengan teknologi modern untuk performa optimal.', 
+                tech: ['Laravel', 'MySQL', 'Tailwind', 'Javascript'], 
+                demoLink: 'https://lytheria.xyz', 
+                codeLink: 'https://github.com/Zayidx/Web-ServerLytheria' 
+            },
+            { 
+                id: 2, 
+                category: 'web', 
+                imgSrc: 'img/project/portofolio.png', 
+                title: 'Web Portofolio', 
+                description: 'Portofolio web dengan desain UI/UX modern dan intuitif, dilengkapi fitur unduh CV, mode terang/gelap, serta integrasi kontak via EmailJS untuk fungsionalitas penuh.', 
+                tech: ['HTML', 'CSS', 'JavaScript'], 
+                demoLink: 'https://portofolio-website-farid-indrawan.vercel.app/', 
+                codeLink: 'https://github.com/Zayidx/Portofolio_Website_Farid_Indrawan' 
+            },
+            { 
+                id: 3, 
+                category: 'web', 
+                imgSrc: 'img/project/simagang.png', 
+                title: 'Sistem Informasi Magang', 
+                description: 'Aplikasi untuk mengelola informasi dan proses magang secara efisien. Didesain dengan antarmuka yang modern untuk memudahkan pendaftaran dan pemantauan.', 
+                tech: ['HTML', 'CSS', 'JavaScript'], 
+                demoLink: '#', 
+                codeLink: '#' 
             }
-        }
+            // <-- Tempel proyek baru di sini
+        ];
 
-        function loadData() {
-            const storedProjects = localStorage.getItem('projectsData');
-            const storedCerts = localStorage.getItem('certificatesData');
-            projectsData = storedProjects ? JSON.parse(storedProjects) : defaultProjects;
-            certificatesData = storedCerts ? JSON.parse(storedCerts) : defaultCertificates;
-        }
+        // --- DATA SERTIFIKAT ---
+        // Untuk menambahkan sertifikat baru, salin salah satu blok (dari { sampai }),
+        // tempel di bawahnya, dan ubah nilainya. Pastikan ada koma (,) di antara setiap blok.
+        const certificatesData = [
+            { 
+                id: 1, 
+                title: 'Belajar Dasar Pemrograman JavaScript', 
+                issuer: 'Dicoding', 
+                date: '17 Mei 2024', 
+                description: 'Melalui pembelajaran JavaScript yang komprehensif, saya telah membangun fondasi yang kuat dalam logika pemrograman, struktur data (Object, Array, Map, Set), dan fungsi. Saya mampu merancang arsitektur kode yang skalabel menggunakan konsep Object-Oriented Programming (OOP) dan Functional Programming. Selain itu, saya terampil dalam siklus pengembangan penuh, mulai dari setup environment dengan Node.js, mengelola dependensi via NPM, menulis kode asynchronous yang efisien, menangani error, hingga melakukan pengujian untuk memastikan kualitas aplikasi.', 
+                driveLink: 'https://drive.google.com/file/d/1XN2LgN5Y_7GTKOsVE5sV-Zwasy5pTch-/view?usp=drive_link', 
+                pdfSrc: '', // Kosongkan jika tidak ada file PDF
+                fullSrc: '/img/certificate/belajar_dasar_pemrograman_javascript.png', 
+                thumbSrc: '/img/certificate/belajar_dasar_pemrograman_javascript.png' 
+            },
+            { 
+                id: 2, 
+                title: 'Belajar Dasar Pemrograman Web', 
+                issuer: 'Dicoding', 
+                date: '29 Feb 2024', 
+                description: 'Menguasai pengembangan front-end dari dasar, dengan keahlian mendalam pada HTML untuk membangun struktur web yang semantik dan CSS untuk menciptakan tampilan visual yang menarik. Terampil dalam menerapkan teknik layouting modern seperti Flexbox dan media queries untuk memastikan pengalaman pengguna yang optimal dan responsif di berbagai perangkat.', 
+                driveLink: 'https://drive.google.com/file/d/1IofYmSzRD5H6LlmfnPMfS09Yusfd9aOV/view?usp=drive_link', // Kosongkan jika tidak ada link
+                pdfSrc: '', 
+                fullSrc: '/img/certificate/belajar_dasar_pemrograman_web.png', 
+                thumbSrc: '/img/certificate/belajar_dasar_pemrograman_web.png' 
+            },
+            { 
+                id: 3, 
+                title: 'Belajar Membuat Front-End Web untuk Pemula', 
+                issuer: 'Dicoding', 
+                date: '4 Mei 2024', 
+                description: 'Mampu mentransformasi halaman web statis menjadi aplikasi yang dinamis dan interaktif. Menguasai manipulasi DOM untuk mengubah konten dan struktur halaman secara real-time, serta mahir dalam mengimplementasikan Event Handling untuk merespons setiap aksi pengguna. Berpengalaman menggunakan Web Storage untuk menyimpan data di sisi klien, meningkatkan pengalaman pengguna secara keseluruhan.', 
+                driveLink: 'https://drive.google.com/file/d/1Z3LHCkGabr8AxfjhHBfES7aBinohmb-9/view?usp=drive_link', 
+                pdfSrc: '', 
+                fullSrc: '/img/certificate/belajar_membuat_frontend_web_untuk_pemula.png', 
+                thumbSrc: '/img/certificate/belajar_membuat_frontend_web_untuk_pemula.png' 
+            }
+            // <-- Tempel sertifikat baru di sini
+        ];
+
+
+        // =================================================================================
+        // --- LOGIC WEBSITE ---
+        // Anda tidak perlu mengubah kode di bawah ini kecuali untuk kustomisasi lanjutan.
+        // =================================================================================
 
         // --- RENDER FUNCTIONS ---
         function renderProjects() {
@@ -550,10 +558,6 @@
                 card.dataset.aos = 'fade-up';
                 
                 card.innerHTML = `
-                    <div class="admin-controls">
-                        <button class="admin-btn" onclick="openCrudModal('project', ${p.id})"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="admin-btn" onclick="deleteItem('project', ${p.id})"><i class="fas fa-trash"></i></button>
-                    </div>
                     <div class="project-image">
                         <img src="${p.imgSrc}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2d3748/ffffff?text=Image';">
                         <div class="project-overlay">
@@ -585,154 +589,16 @@
                 card.dataset.id = c.id;
                 
                 card.innerHTML = `
-                    <div class="admin-controls">
-                        <button class="admin-btn" onclick="openCrudModal('certificate', ${c.id})"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="admin-btn" onclick="deleteItem('certificate', ${c.id})"><i class="fas fa-trash"></i></button>
-                    </div>
                     <img src="${c.thumbSrc}" alt="${c.title}" class="certificate-image" onerror="this.onerror=null;this.src='https://placehold.co/600x420/cccccc/ffffff?text=Thumb';">
                     <h3 class="certificate-title">${c.title}</h3>
                 `;
-                card.addEventListener('click', (e) => {
-                    if (!e.target.closest('.admin-controls')) {
-                        openLightbox(c.id);
-                    }
-                });
+                card.addEventListener('click', () => openLightbox(c.id));
                 grid.appendChild(card);
             });
         }
         
-        // --- FILE HANDLING ---
-        function readFileAsDataURL(file) {
-            return new Promise((resolve, reject) => {
-                if(file.size > 5 * 1024 * 1024){ // 5MB limit
-                  reject('File is too large. Max 5MB allowed.');
-                  return;
-                }
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // --- ADMIN MODE & CRUD ---
-        const body = document.body;
-        function enterAdminMode() { if (prompt("Enter admin password:") === "farid0236") body.classList.add('admin-mode'); else alert("Incorrect password."); }
-        function exitAdminMode() { body.classList.remove('admin-mode'); }
-        document.getElementById('secret-admin-btn').addEventListener('click', enterAdminMode);
-
-        const crudModal = document.getElementById('crudModal');
-        const crudModalTitle = document.getElementById('crudModalTitle');
-        const formFields = document.getElementById('formFields');
-        const crudForm = document.getElementById('crudForm');
-        const crudItemId = document.getElementById('crudItemId');
-        const crudItemType = document.getElementById('crudItemType');
-
-        function openCrudModal(type, id = null) {
-            crudItemType.value = type;
-            let item = {};
-            let isNew = id === null;
-
-            if (isNew) {
-                crudModalTitle.textContent = `Add New ${type}`;
-                crudItemId.value = Date.now();
-            } else {
-                crudModalTitle.textContent = `Edit ${type}`;
-                const dataArray = type === 'project' ? projectsData : certificatesData;
-                item = dataArray.find(i => i.id == id);
-                crudItemId.value = id;
-            }
-            
-            if (type === 'project') {
-                formFields.innerHTML = `
-                    <div class="crud-form-group"><label>Title</label><input type="text" id="title" value="${item.title || ''}" required></div>
-                    <div class="crud-form-group"><label>Description</label><textarea id="description" rows="3" required>${item.description || ''}</textarea></div>
-                    <div class="crud-form-group"><label>Image (Optional, replaces existing)</label><input type="file" id="imgSrcFile" accept="image/*"></div>
-                    <div class="crud-form-group"><label>Category</label><input type="text" id="category" value="${item.category || 'web'}" required></div>
-                    <div class="crud-form-group"><label>Tech (comma-separated)</label><input type="text" id="tech" value="${(item.tech || []).join(', ')}" required></div>
-                    <div class="crud-form-group"><label>Demo Link</label><input type="text" id="demoLink" value="${item.demoLink || ''}"></div>
-                    <div class="crud-form-group"><label>Code Link</label><input type="text" id="codeLink" value="${item.codeLink || ''}"></div>
-                `;
-            } else { // certificate
-                formFields.innerHTML = `
-                    <div class="crud-form-group"><label>Title</label><input type="text" id="title" value="${item.title || ''}" required></div>
-                    <div class="crud-form-group"><label>Issuer</label><input type="text" id="issuer" value="${item.issuer || ''}" required></div>
-                    <div class="crud-form-group"><label>Date</label><input type="text" id="date" value="${item.date || ''}" required></div>
-                    <div class="crud-form-group"><label>Description</label><textarea id="description" rows="3" required>${item.description || ''}</textarea></div>
-                    <div class="crud-form-group"><label>Thumbnail Image (Optional)</label><input type="file" id="thumbSrcFile" accept="image/*"></div>
-                    <div class="crud-form-group"><label>Full Image (Optional)</label><input type="file" id="fullSrcFile" accept="image/*"></div>
-                    <div class="crud-form-group"><label>PDF File (Optional)</label><input type="file" id="pdfSrcFile" accept=".pdf"></div>
-                    <div class="crud-form-group"><label>Google Drive Link</label><input type="text" id="driveLink" value="${item.driveLink || ''}"></div>
-                `;
-            }
-            crudModal.classList.add('show');
-        }
-        
-        function closeCrudModal() { crudModal.classList.remove('show'); }
-
-        crudForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const id = parseInt(crudItemId.value);
-            const type = crudItemType.value;
-            const dataArray = type === 'project' ? projectsData : certificatesData;
-            let currentItem = dataArray.find(i => i.id == id);
-            if (!currentItem) { // Is a new item
-                currentItem = { id: id };
-                dataArray.push(currentItem);
-            }
-
-            try {
-                if (type === 'project') {
-                    const imgFile = document.getElementById('imgSrcFile').files[0];
-                    if(imgFile) currentItem.imgSrc = await readFileAsDataURL(imgFile);
-                    
-                    currentItem.title = document.getElementById('title').value;
-                    currentItem.description = document.getElementById('description').value;
-                    currentItem.category = document.getElementById('category').value;
-                    currentItem.tech = document.getElementById('tech').value.split(',').map(t => t.trim());
-                    currentItem.demoLink = document.getElementById('demoLink').value;
-                    currentItem.codeLink = document.getElementById('codeLink').value;
-                    renderProjects();
-                } else { // certificate
-                    const thumbFile = document.getElementById('thumbSrcFile').files[0];
-                    const fullFile = document.getElementById('fullSrcFile').files[0];
-                    const pdfFile = document.getElementById('pdfSrcFile').files[0];
-
-                    if(thumbFile) currentItem.thumbSrc = await readFileAsDataURL(thumbFile);
-                    if(fullFile) currentItem.fullSrc = await readFileAsDataURL(fullFile);
-                    if(pdfFile) currentItem.pdfSrc = await readFileAsDataURL(pdfFile);
-                    
-                    currentItem.title = document.getElementById('title').value;
-                    currentItem.issuer = document.getElementById('issuer').value;
-                    currentItem.date = document.getElementById('date').value;
-                    currentItem.description = document.getElementById('description').value;
-                    currentItem.driveLink = document.getElementById('driveLink').value;
-                    renderCertificates();
-                }
-                
-                saveData();
-                closeCrudModal();
-            } catch (error) {
-                alert(`Error saving file: ${error}`);
-            }
-        });
-
-        function deleteItem(type, id) {
-            if (confirm(`Are you sure you want to delete this ${type}?`)) {
-                if (type === 'project') {
-                    projectsData = projectsData.filter(p => p.id != id);
-                    renderProjects();
-                } else {
-                    certificatesData = certificatesData.filter(c => c.id != id);
-                    renderCertificates();
-                }
-                saveData();
-            }
-        }
-        
         // --- INITIALIZATION & EVENT LISTENERS ---
         document.addEventListener('DOMContentLoaded', () => {
-            loadData();
             renderProjects();
             renderCertificates();
             AOS.init({ duration: 800, once: true, offset: 50 });
@@ -764,6 +630,7 @@
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
+        const body = document.body;
         const savedTheme = localStorage.getItem('theme') || 'light';
         body.setAttribute('data-theme', savedTheme);
         updateThemeIcon(savedTheme);
@@ -890,21 +757,21 @@
 
             if (downloadHandler) downloadButton.removeEventListener('click', downloadHandler);
             if (cert.pdfSrc) {
-                downloadButton.disabled = false;
+                downloadButton.style.display = 'flex';
                 const filename = `${cert.title.replace(/\s/g, '_')}.pdf`;
                 downloadHandler = () => triggerDownload(cert.pdfSrc, filename);
                 downloadButton.addEventListener('click', downloadHandler);
             } else {
-                downloadButton.disabled = true;
+                downloadButton.style.display = 'none';
             }
 
             if (driveHandler) driveButton.removeEventListener('click', driveHandler);
             if (cert.driveLink) {
-                driveButton.disabled = false;
+                driveButton.style.display = 'flex';
                 driveHandler = () => window.open(cert.driveLink, '_blank');
                 driveButton.addEventListener('click', driveHandler);
             } else {
-                driveButton.disabled = true;
+                driveButton.style.display = 'none';
             }
 
             lightboxModal.classList.add('show');
@@ -999,4 +866,4 @@
         }
     </script>
 </body>
-</ht
+</html>
