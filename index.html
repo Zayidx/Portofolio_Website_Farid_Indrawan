@@ -109,7 +109,7 @@
         header.scrolled { background: rgba(255, 255, 255, 0.98); box-shadow: var(--shadow-light); }
         [data-theme="dark"] header.scrolled { background: rgba(26, 26, 26, 0.98); }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); text-decoration: none; }
         .nav-links { display: flex; list-style: none; gap: 2rem; }
         .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: var(--transition); position: relative; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent-color); }
@@ -118,8 +118,8 @@
         .nav-controls { display: flex; align-items: center; gap: 1rem; }
         .theme-toggle { background: none; border: none; font-size: 1.2rem; color: var(--text-color); cursor: pointer; padding: 8px; border-radius: 50%; transition: var(--transition); }
         .theme-toggle:hover { background: var(--bg-medium); color: var(--accent-color); }
-        .menu-toggle { display: none; flex-direction: column; cursor: pointer; z-index: 1001; }
-        .menu-toggle span { width: 25px; height: 3px; background: var(--text-color); margin: 3px 0; transition: 0.3s; }
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; z-index: 1001; background: none; border: none; padding: 5px; }
+        .menu-toggle span { display: block; width: 25px; height: 3px; background: var(--text-color); margin: 3px 0; transition: 0.3s; }
         .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
@@ -155,7 +155,7 @@
         .about-image-wrapper:hover .about-image-bg { transform: scale(1.1); }
         .about-image { position: relative; }
         .about-image img { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-medium); transition: var(--transition); }
-        .stats-container { margin-top: 2.5rem; padding-right: 80%;}
+        .stats-container { margin-top: 2.5rem; max-width: 250px; }
         .stat-card { background: var(--bg-medium); padding: 1.5rem; border-radius: 10px; text-align: center; border: 1px solid var(--border-color); }
         .stat-card h3 { font-size: 2rem; color: var(--accent-color); margin-bottom: 0.5rem; }
         .stat-card p { font-size: 0.9rem; color: var(--text-light); }
@@ -171,12 +171,11 @@
 
         /* Projects Section */
         .projects { background: var(--bg-light); }
-        .project-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+        .project-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
         .filter-btn { background: var(--bg-medium); color: var(--text-color); border: 1px solid var(--border-color); padding: 0.5rem 1.5rem; border-radius: 20px; cursor: pointer; transition: var(--transition); font-weight: 500; }
         .filter-btn.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
-        .project-card { background: var(--bg-light); border-radius: 15px; box-shadow: var(--shadow-light); transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border-color); position: relative; }
-        .project-card.hide { transform: scale(0.8); opacity: 0; display: none; }
+        .project-card { background: var(--bg-light); border-radius: 15px; box-shadow: var(--shadow-light); transition: transform 0.4s ease, box-shadow 0.4s ease; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border-color); position: relative; }
         .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-medium); }
         .project-image { position: relative; overflow: hidden; cursor: pointer; }
         .project-card img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.4s ease; }
@@ -206,7 +205,7 @@
         .lightbox-modal.show { display: flex; opacity: 1; }
         .lightbox-content { position: relative; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; }
         .lightbox-image { max-width: 100%; max-height: 65vh; object-fit: contain; margin-bottom: 1rem; }
-        .lightbox-close { position: absolute; top: -5px; right: 0px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .lightbox-close { position: absolute; top: -5px; right: 0px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.3s; background: none; border: none; }
         .lightbox-close:hover { color: #ccc; }
         .lightbox-info { text-align: center; color: #fff; margin-top: 10px; max-width: 80ch; }
         .lightbox-info h3 { margin-bottom: 0.5rem; color: #fff; font-size: 1.5rem; }
@@ -257,10 +256,10 @@
             .hero-content .subtitle { font-size: 1.2rem; }
             .about-content { grid-template-columns: 1fr; text-align: center; }
             .about-image { margin-bottom: 2rem; justify-self: center; }
+            .stats-container { max-width: 100%; margin-left: auto; margin-right: auto; }
             .section-title { font-size: 2.2rem; }
             .projects-grid, .gallery-grid { grid-template-columns: 1fr; }
             .cookie-content { flex-direction: column; text-align: center; }
-            .stats-container { margin-top: 2.5rem; padding-right: 0;}
         }
     </style>
 </head>
@@ -279,7 +278,7 @@
     <!-- Header -->
     <header>
         <nav class="container">
-            <div class="logo">FI</div>
+            <a href="#home" class="logo">FI</a>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
@@ -292,11 +291,11 @@
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon"></i>
                 </button>
-                <div class="menu-toggle" onclick="toggleMenu()">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -418,7 +417,7 @@
 
     <!-- Lightbox Modal -->
     <div id="lightboxModal" class="lightbox-modal">
-        <span class="lightbox-close">&times;</span>
+        <button class="lightbox-close" aria-label="Close image viewer">&times;</button>
         <div class="lightbox-content">
             <img id="lightboxImage" class="lightbox-image" src="" alt="Certificate Full View">
             <div id="lightbox-info" class="lightbox-info">
@@ -448,8 +447,8 @@
                 <p>This website uses cookies to ensure you get the best experience. <a href="#" style="color: var(--accent-color);">Learn more</a></p>
             </div>
             <div class="cookie-buttons">
-                <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Accept</button>
-                <button class="cookie-btn cookie-decline" onclick="declineCookies()">Decline</button>
+                <button class="cookie-btn cookie-accept" id="cookieAccept">Accept</button>
+                <button class="cookie-btn cookie-decline" id="cookieDecline">Decline</button>
             </div>
         </div>
     </div>
@@ -459,13 +458,10 @@
     <script>
         // =================================================================================
         // --- PORTFOLIO DATA ---
-        // Di sini Anda bisa mengelola data proyek dan sertifikat.
-        // Cukup salin-tempel (copy-paste) blok data dan ubah nilainya.
+        // Manage your project and certificate data here.
+        // To add new items, copy an existing block and change the values.
         // =================================================================================
 
-        // --- DATA PROYEK ---
-        // Untuk menambahkan proyek baru, salin salah satu blok (dari { sampai }), 
-        // tempel di bawahnya, dan ubah nilainya. Pastikan ada koma (,) di antara setiap blok.
         const projectsData = [
             { 
                 id: 1, 
@@ -497,12 +493,9 @@
                 demoLink: '#', 
                 codeLink: '#' 
             }
-            // <-- Tempel proyek baru di sini
+            // <-- Paste new project data here
         ];
 
-        // --- DATA SERTIFIKAT ---
-        // Untuk menambahkan sertifikat baru, salin salah satu blok (dari { sampai }),
-        // tempel di bawahnya, dan ubah nilainya. Pastikan ada koma (,) di antara setiap blok.
         const certificatesData = [
             { 
                 id: 1, 
@@ -511,7 +504,7 @@
                 date: '17 Mei 2024', 
                 description: 'Melalui pembelajaran JavaScript yang komprehensif, saya telah membangun fondasi yang kuat dalam logika pemrograman, struktur data (Object, Array, Map, Set), dan fungsi. Saya mampu merancang arsitektur kode yang skalabel menggunakan konsep Object-Oriented Programming (OOP) dan Functional Programming. Selain itu, saya terampil dalam siklus pengembangan penuh, mulai dari setup environment dengan Node.js, mengelola dependensi via NPM, menulis kode asynchronous yang efisien, menangani error, hingga melakukan pengujian untuk memastikan kualitas aplikasi.', 
                 driveLink: 'https://drive.google.com/file/d/1XN2LgN5Y_7GTKOsVE5sV-Zwasy5pTch-/view?usp=drive_link', 
-                pdfSrc: '', // Kosongkan jika tidak ada file PDF
+                pdfSrc: '', // Add PDF file link here for download functionality
                 fullSrc: '/img/certificate/belajar_dasar_pemrograman_javascript.png', 
                 thumbSrc: '/img/certificate/belajar_dasar_pemrograman_javascript.png' 
             },
@@ -521,7 +514,7 @@
                 issuer: 'Dicoding', 
                 date: '29 Feb 2024', 
                 description: 'Menguasai pengembangan front-end dari dasar, dengan keahlian mendalam pada HTML untuk membangun struktur web yang semantik dan CSS untuk menciptakan tampilan visual yang menarik. Terampil dalam menerapkan teknik layouting modern seperti Flexbox dan media queries untuk memastikan pengalaman pengguna yang optimal dan responsif di berbagai perangkat.', 
-                driveLink: 'https://drive.google.com/file/d/1IofYmSzRD5H6LlmfnPMfS09Yusfd9aOV/view?usp=drive_link', // Kosongkan jika tidak ada link
+                driveLink: 'https://drive.google.com/file/d/1IofYmSzRD5H6LlmfnPMfS09Yusfd9aOV/view?usp=drive_link',
                 pdfSrc: '', 
                 fullSrc: '/img/certificate/belajar_dasar_pemrograman_web.png', 
                 thumbSrc: '/img/certificate/belajar_dasar_pemrograman_web.png' 
@@ -537,275 +530,347 @@
                 fullSrc: '/img/certificate/belajar_membuat_frontend_web_untuk_pemula.png', 
                 thumbSrc: '/img/certificate/belajar_membuat_frontend_web_untuk_pemula.png' 
             }
-            // <-- Tempel sertifikat baru di sini
+            // <-- Paste new certificate data here
         ];
 
 
         // =================================================================================
-        // --- LOGIC WEBSITE ---
-        // Anda tidak perlu mengubah kode di bawah ini kecuali untuk kustomisasi lanjutan.
+        // --- WEBSITE LOGIC ---
+        // This section contains the core functionality of the website.
+        // No changes are needed unless for advanced customization.
         // =================================================================================
 
-        // --- RENDER FUNCTIONS ---
-        function renderProjects() {
-            const grid = document.getElementById('projectsGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            projectsData.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.dataset.category = p.category;
-                card.dataset.aos = 'fade-up';
-                
-                card.innerHTML = `
-                    <div class="project-image">
-                        <img src="${p.imgSrc}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2d3748/ffffff?text=Image';">
-                        <div class="project-overlay">
-                            <h3>${p.title}</h3>
-                            <div class="project-links">
-                                <a href="${p.demoLink}" target="_blank" aria-label="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="${p.codeLink}" target="_blank" aria-label="Source Code"><i class="fab fa-github"></i></a>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- RENDER FUNCTIONS ---
+            function renderProjects() {
+                const grid = document.getElementById('projectsGrid');
+                if (!grid) return;
+                grid.innerHTML = '';
+                projectsData.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.dataset.category = p.category;
+                    card.dataset.aos = 'fade-up';
+                    card.setAttribute('role', 'group');
+                    card.setAttribute('aria-label', p.title);
+                    
+                    card.innerHTML = `
+                        <div class="project-image">
+                            <img src="${p.imgSrc}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2d3748/ffffff?text=Image';">
+                            <div class="project-overlay">
+                                <h3>${p.title}</h3>
+                                <div class="project-links">
+                                    <a href="${p.demoLink}" target="_blank" rel="noopener noreferrer" aria-label="Live Demo for ${p.title}"><i class="fas fa-external-link-alt"></i></a>
+                                    <a href="${p.codeLink}" target="_blank" rel="noopener noreferrer" aria-label="Source Code for ${p.title}"><i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-content">
-                        <p>${p.description}</p>
-                        <div class="project-tech">
-                            ${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+                        <div class="project-content">
+                            <p>${p.description}</p>
+                            <div class="project-tech">
+                                ${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+                            </div>
                         </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
+                    `;
+                    grid.appendChild(card);
+                });
+            }
 
-        function renderCertificates() {
-            const grid = document.getElementById('galleryGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            certificatesData.forEach(c => {
-                const card = document.createElement('div');
-                card.className = 'certificate-card';
-                card.dataset.id = c.id;
-                
-                card.innerHTML = `
-                    <img src="${c.thumbSrc}" alt="${c.title}" class="certificate-image" onerror="this.onerror=null;this.src='https://placehold.co/600x420/cccccc/ffffff?text=Thumb';">
-                    <h3 class="certificate-title">${c.title}</h3>
-                `;
-                card.addEventListener('click', () => openLightbox(c.id));
-                grid.appendChild(card);
-            });
-        }
-        
-        // --- INITIALIZATION & EVENT LISTENERS ---
-        document.addEventListener('DOMContentLoaded', () => {
+            function renderCertificates() {
+                const grid = document.getElementById('galleryGrid');
+                if (!grid) return;
+                grid.innerHTML = '';
+                certificatesData.forEach(c => {
+                    const card = document.createElement('div');
+                    card.className = 'certificate-card';
+                    card.dataset.id = c.id;
+                    card.setAttribute('role', 'button');
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('aria-label', `View certificate: ${c.title}`);
+                    
+                    card.innerHTML = `
+                        <img src="${c.thumbSrc}" alt="${c.title}" class="certificate-image" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/600x420/cccccc/ffffff?text=Thumb';">
+                        <h3 class="certificate-title">${c.title}</h3>
+                    `;
+                    card.addEventListener('click', () => openLightbox(c.id));
+                    card.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            openLightbox(c.id);
+                        }
+                    });
+                    grid.appendChild(card);
+                });
+            }
+
+            // --- INITIALIZATION ---
             renderProjects();
             renderCertificates();
             AOS.init({ duration: 800, once: true, offset: 50 });
-        });
-        window.addEventListener('load', () => document.getElementById('loader').classList.add('hidden'));
+            window.addEventListener('load', () => document.getElementById('loader').classList.add('hidden'));
 
-        // Typing Animation
-        const typingText = document.getElementById('typingText');
-        if(typingText) {
-            const texts = ['FullStack Developer', 'Web Developer', 'UI/UX Designer'];
-            let textIndex = 0, charIndex = 0, isDeleting = false;
-            function typeWriter() {
-                const currentText = texts[textIndex];
-                if (isDeleting) {
-                    typingText.textContent = currentText.substring(0, charIndex - 1); charIndex--;
+            // --- UI ELEMENTS ---
+            const typingTextEl = document.getElementById('typingText');
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const menuToggleBtn = document.getElementById('menuToggle');
+            const navLinksContainer = document.querySelector('.nav-links');
+            const headerEl = document.querySelector('header');
+            const scrollProgressEl = document.getElementById('scrollProgress');
+            const backToTopBtn = document.getElementById('backToTop');
+            const contactFormEl = document.getElementById('contact-form');
+            const cookieConsentEl = document.getElementById('cookieConsent');
+
+            // --- TYPING ANIMATION ---
+            if(typingTextEl) {
+                const texts = ['FullStack Developer', 'Web Developer', 'UI/UX Designer'];
+                let textIndex = 0, charIndex = 0, isDeleting = false;
+                function typeWriter() {
+                    const currentText = texts[textIndex];
+                    if (isDeleting) {
+                        typingTextEl.textContent = currentText.substring(0, charIndex - 1); charIndex--;
+                    } else {
+                        typingTextEl.textContent = currentText.substring(0, charIndex + 1); charIndex++;
+                    }
+                    if (!isDeleting && charIndex === currentText.length) {
+                        setTimeout(() => isDeleting = true, 2000);
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false; textIndex = (textIndex + 1) % texts.length;
+                    }
+                    setTimeout(typeWriter, isDeleting ? 50 : 100);
+                }
+                setTimeout(typeWriter, 1500);
+            }
+
+            // --- THEME TOGGLE ---
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+                if(window.initParticles) setTimeout(() => window.initParticles(), 0);
+            });
+            function updateThemeIcon(theme) { 
+                const themeIcon = themeToggleBtn.querySelector('i');
+                if(themeIcon) themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun'; 
+            }
+
+            // --- MOBILE MENU ---
+            function toggleMenu() {
+                const isActive = navLinksContainer.classList.toggle('active');
+                menuToggleBtn.classList.toggle('active');
+                menuToggleBtn.setAttribute('aria-expanded', isActive);
+            }
+            menuToggleBtn.addEventListener('click', toggleMenu);
+            navLinksContainer.querySelectorAll('a').forEach(link => { 
+                link.addEventListener('click', () => { 
+                    if (navLinksContainer.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                }); 
+            });
+
+            // --- SCROLL HANDLERS ---
+            window.addEventListener('scroll', () => {
+                if (headerEl) headerEl.classList.toggle('scrolled', window.scrollY > 50);
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (scrollProgressEl && docHeight > 0) {
+                    scrollProgressEl.style.width = `${(scrollTop / docHeight) * 100}%`;
+                }
+                if (backToTopBtn) backToTopBtn.classList.toggle('visible', window.scrollY > 300);
+            });
+            if(backToTopBtn) backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // --- ACTIVE NAV HIGHLIGHTING ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').substring(1) === id);
+                        });
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.5 });
+            sections.forEach(section => sectionObserver.observe(section));
+
+            // --- PROJECT FILTERING ---
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelector('.filter-btn.active').classList.remove('active');
+                    button.classList.add('active');
+                    const filter = button.dataset.filter;
+                    document.querySelectorAll('.project-card').forEach(card => {
+                        const isVisible = filter === 'all' || card.dataset.category === filter;
+                        card.style.display = isVisible ? 'flex' : 'none';
+                    });
+                });
+            });
+            
+            // --- ANIMATE STATS ON SCROLL ---
+            const statsContainer = document.querySelector('.stats-container');
+            if (statsContainer) {
+                const statsObserver = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        document.querySelectorAll('.stat-number').forEach(numberEl => {
+                            const goal = parseInt(numberEl.dataset.goal);
+                            if (isNaN(goal)) return;
+                            let current = 0;
+                            const increment = Math.max(1, Math.ceil(goal / 100));
+                            const counter = setInterval(() => {
+                                current += increment;
+                                if (current >= goal) {
+                                    clearInterval(counter);
+                                    numberEl.textContent = `${goal}+`;
+                                } else {
+                                    numberEl.textContent = `${current}+`;
+                                }
+                            }, 20);
+                        });
+                        statsObserver.unobserve(statsContainer);
+                    }
+                }, { threshold: 0.5 });
+                statsObserver.observe(statsContainer);
+            }
+
+            // --- GALLERY LIGHTBOX LOGIC ---
+            const lightboxModal = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const downloadButton = document.getElementById('downloadButton');
+            const driveButton = document.getElementById('driveButton');
+            const closeBtn = document.querySelector('.lightbox-close');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxIssuer = document.getElementById('lightbox-issuer');
+            const lightboxDate = document.getElementById('lightbox-date');
+            const lightboxDescription = document.getElementById('lightbox-description');
+
+            async function triggerDownload(url, filename) {
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+                    const blob = await response.blob();
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = blobUrl;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(blobUrl);
+                    a.remove();
+                } catch (error) {
+                    console.error("Download failed:", error);
+                    alert("Could not download the file. The file might be missing or the link is broken.");
+                }
+            }
+            
+            let currentDownloadHandler;
+            let currentDriveHandler;
+
+            function openLightbox(id) {
+                const cert = certificatesData.find(c => c.id == id);
+                if (!cert) return;
+
+                lightboxImage.src = cert.fullSrc || 'https://placehold.co/1200x840?text=No+Image';
+                lightboxTitle.textContent = cert.title;
+                lightboxIssuer.textContent = `Issued by: ${cert.issuer}`;
+                lightboxDate.textContent = `Date: ${cert.date}`;
+                lightboxDescription.textContent = cert.description;
+
+                if (currentDownloadHandler) downloadButton.removeEventListener('click', currentDownloadHandler);
+                if (cert.pdfSrc) {
+                    downloadButton.style.display = 'flex';
+                    const filename = `${cert.title.replace(/\s/g, '_')}.pdf`;
+                    currentDownloadHandler = () => triggerDownload(cert.pdfSrc, filename);
+                    downloadButton.addEventListener('click', currentDownloadHandler);
                 } else {
-                    typingText.textContent = currentText.substring(0, charIndex + 1); charIndex++;
+                    downloadButton.style.display = 'none';
                 }
-                if (!isDeleting && charIndex === currentText.length) {
-                    setTimeout(() => isDeleting = true, 2000);
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false; textIndex = (textIndex + 1) % texts.length;
+
+                if (currentDriveHandler) driveButton.removeEventListener('click', currentDriveHandler);
+                if (cert.driveLink) {
+                    driveButton.style.display = 'flex';
+                    currentDriveHandler = () => window.open(cert.driveLink, '_blank', 'noopener,noreferrer');
+                    driveButton.addEventListener('click', currentDriveHandler);
+                } else {
+                    driveButton.style.display = 'none';
                 }
-                setTimeout(typeWriter, isDeleting ? 50 : 100);
+
+                lightboxModal.classList.add('show');
             }
-            setTimeout(typeWriter, 1500);
-        }
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        const body = document.body;
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        body.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-        themeToggle.addEventListener('click', () => {
-            const newTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-            if(window.initParticles) setTimeout(() => initParticles(), 0);
-        });
-        function updateThemeIcon(theme) { themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun'; }
+            function closeLightbox() { lightboxModal.classList.remove('show'); }
+            if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
+            if(lightboxModal) lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) closeLightbox(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightboxModal.classList.contains('show')) closeLightbox(); });
 
-        // Mobile Menu
-        function toggleMenu() { document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.menu-toggle').classList.toggle('active'); }
-        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { document.querySelector('.nav-links').classList.remove('active'); document.querySelector('.menu-toggle').classList.remove('active'); }); });
+            // --- EMAILJS FORM ---
+            (function() { emailjs.init({ publicKey: "uEZaO1OBCxGcVIl2L" }); })();
+            if(contactFormEl) {
+                contactFormEl.addEventListener('submit', function(e) { 
+                    e.preventDefault(); 
+                    const btn = document.getElementById('submit-button');
+                    const msg = document.getElementById('status-message');
+                    btn.disabled = true; 
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...'; 
+                    msg.textContent = ''; 
+                    msg.className = ''; 
+                    emailjs.sendForm('service_wthl7xn', 'template_xpd0t4e', this)
+                        .then(() => {
+                            msg.textContent = 'Message sent successfully!'; 
+                            msg.classList.add('success'); 
+                            this.reset();
+                        }, (err) => {
+                            msg.textContent = 'Failed to send message. Please try again.'; 
+                            msg.classList.add('error');
+                            console.error('EmailJS Error:', err);
+                        })
+                        .finally(() => {
+                            btn.disabled = false; 
+                            btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+                        }); 
+                });
+            }
 
-        // Scroll Handlers
-        const header = document.querySelector('header');
-        const scrollProgress = document.getElementById('scrollProgress');
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (header) header.classList.toggle('scrolled', window.scrollY > 50);
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.scrollHeight - window.innerHeight;
-            if (scrollProgress) scrollProgress.style.width = `${(scrollTop / docHeight) * 100}%`;
-            if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 300);
-        });
-        if(backToTop) backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        // Active Nav Highlighting & Smooth Scrolling
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
-                    });
-                }
+            // --- COOKIE CONSENT ---
+            if (cookieConsentEl && !localStorage.getItem('cookieConsent')) {
+                setTimeout(() => cookieConsentEl.classList.add('show'), 2000);
+            }
+            document.getElementById('cookieAccept')?.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieConsentEl.classList.remove('show');
             });
-        }, { root: null, rootMargin: '0px', threshold: 0.5 });
-        sections.forEach(section => sectionObserver.observe(section));
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-        });
-
-        // Project Filtering
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelector('.filter-btn.active').classList.remove('active'); button.classList.add('active');
-                const filter = button.dataset.filter;
-                document.querySelectorAll('.project-card').forEach(card => { card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'flex' : 'none'; });
+            document.getElementById('cookieDecline')?.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'declined');
+                cookieConsentEl.classList.remove('show');
             });
         });
-        
-        // Animate Stats
-        const statsContainer = document.querySelector('.stats-container');
-        if (statsContainer) {
-            const statsObserver = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    document.querySelectorAll('.stat-number').forEach(number => {
-                        const goal = parseInt(number.dataset.goal);
-                        let current = 0;
-                        const increment = Math.ceil(goal / 100);
-                        const counter = setInterval(() => {
-                            current += increment;
-                            if (current >= goal) {
-                                clearInterval(counter);
-                                number.textContent = `${goal}+`;
-                            } else {
-                                number.textContent = `${current}+`;
-                            }
-                        }, 20);
-                    });
-                    statsObserver.unobserve(statsContainer);
-                }
-            }, { threshold: 0.5 });
-            statsObserver.observe(statsContainer);
-        }
 
-        // Gallery Lightbox Logic
-        const lightboxModal = document.getElementById('lightboxModal');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const downloadButton = document.getElementById('downloadButton');
-        const driveButton = document.getElementById('driveButton');
-        const closeBtn = document.querySelector('.lightbox-close');
-        
-        const lightboxTitle = document.getElementById('lightbox-title');
-        const lightboxIssuer = document.getElementById('lightbox-issuer');
-        const lightboxDate = document.getElementById('lightbox-date');
-        const lightboxDescription = document.getElementById('lightbox-description');
-
-        async function triggerDownload(dataUrl, filename) {
-            try {
-                const response = await fetch(dataUrl);
-                const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                a.remove();
-            } catch (error) {
-                console.error("Download failed:", error);
-                alert("Could not download the file. The file might be missing or the link is broken.");
-            }
-        }
-        
-        let downloadHandler;
-        let driveHandler;
-
-        function openLightbox(id) {
-            const cert = certificatesData.find(c => c.id == id);
-            if (!cert) return;
-
-            lightboxImage.src = cert.fullSrc || 'https://placehold.co/1200x840?text=No+Image';
-            lightboxTitle.textContent = cert.title;
-            lightboxIssuer.textContent = `Issued by: ${cert.issuer}`;
-            lightboxDate.textContent = `Date: ${cert.date}`;
-            lightboxDescription.textContent = cert.description;
-
-            if (downloadHandler) downloadButton.removeEventListener('click', downloadHandler);
-            if (cert.pdfSrc) {
-                downloadButton.style.display = 'flex';
-                const filename = `${cert.title.replace(/\s/g, '_')}.pdf`;
-                downloadHandler = () => triggerDownload(cert.pdfSrc, filename);
-                downloadButton.addEventListener('click', downloadHandler);
-            } else {
-                downloadButton.style.display = 'none';
-            }
-
-            if (driveHandler) driveButton.removeEventListener('click', driveHandler);
-            if (cert.driveLink) {
-                driveButton.style.display = 'flex';
-                driveHandler = () => window.open(cert.driveLink, '_blank');
-                driveButton.addEventListener('click', driveHandler);
-            } else {
-                driveButton.style.display = 'none';
-            }
-
-            lightboxModal.classList.add('show');
-        }
-
-        function closeLightbox() { lightboxModal.classList.remove('show'); }
-        if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
-        if(lightboxModal) lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) closeLightbox(); });
-
-        // EmailJS Form
-        (function() { emailjs.init({ publicKey: "uEZaO1OBCxGcVIl2L" }); })();
-        const contactForm = document.getElementById('contact-form');
-        if(contactForm) contactForm.addEventListener('submit', function(e) { e.preventDefault(); const btn=document.getElementById('submit-button'), msg=document.getElementById('status-message'); btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...'; msg.textContent=''; msg.className=''; emailjs.sendForm('service_wthl7xn', 'template_xpd0t4e', this).then(() => {msg.textContent='Message sent!'; msg.classList.add('success'); this.reset();}, (err) => {msg.textContent='Failed to send.'; msg.classList.add('error');}).finally(() => {btn.disabled=false; btn.innerHTML='Send Message <i class="fas fa-paper-plane"></i>';}); });
-
-        // Cookie Consent
-        const cookieConsent = document.getElementById('cookieConsent');
-        if (cookieConsent && !localStorage.getItem('cookieConsent')) setTimeout(() => cookieConsent.classList.add('show'), 2000);
-        function acceptCookies() { localStorage.setItem('cookieConsent', 'accepted'); cookieConsent.classList.remove('show'); }
-        function declineCookies() { localStorage.setItem('cookieConsent', 'declined'); cookieConsent.classList.remove('show'); }
-
-        // Particle Animation
+        // --- PARTICLE ANIMATION ---
+        // This runs independently as it's a continuous animation.
         const particleCanvas = document.getElementById('particle-canvas');
         if (particleCanvas) {
             const particleCtx = particleCanvas.getContext('2d');
-            particleCanvas.width = window.innerWidth;
-            particleCanvas.height = window.innerHeight;
+            let animationFrameId;
+
+            function setCanvasSize() {
+                particleCanvas.width = window.innerWidth;
+                particleCanvas.height = window.innerHeight;
+            }
+            setCanvasSize();
+
             let particles = [];
             const mouse = { x: null, y: null, radius: (particleCanvas.height / 100) * (particleCanvas.width / 100) };
             
             window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
             window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
             window.addEventListener('resize', () => {
-                particleCanvas.width = innerWidth;
-                particleCanvas.height = innerHeight;
+                setCanvasSize();
                 mouse.radius = ((particleCanvas.height / 100) * (particleCanvas.width / 100));
                 initParticles();
             });
@@ -816,19 +881,24 @@
                 update() {
                     if (this.x > particleCanvas.width || this.x < 0) this.directionX = -this.directionX;
                     if (this.y > particleCanvas.height || this.y < 0) this.directionY = -this.directionY;
-                    let dx = mouse.x - this.x, dy = mouse.y - this.y;
-                    if (Math.sqrt(dx * dx + dy * dy) < mouse.radius + this.size) {
-                        if (mouse.x < this.x && this.x < particleCanvas.width - this.size * 10) this.x += 3;
-                        if (mouse.x > this.x && this.x > this.size * 10) this.x -= 3;
-                        if (mouse.y < this.y && this.y < particleCanvas.height - this.size * 10) this.y += 3;
-                        if (mouse.y > this.y && this.y > this.size * 10) this.y -= 3;
+                    
+                    if (mouse.x !== null && mouse.y !== null) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        if (Math.sqrt(dx * dx + dy * dy) < mouse.radius + this.size) {
+                            if (mouse.x < this.x && this.x < particleCanvas.width - this.size * 10) this.x += 3;
+                            if (mouse.x > this.x && this.x > this.size * 10) this.x -= 3;
+                            if (mouse.y < this.y && this.y < particleCanvas.height - this.size * 10) this.y += 3;
+                            if (mouse.y > this.y && this.y > this.size * 10) this.y -= 3;
+                        }
                     }
                     this.x += this.directionX; this.y += this.directionY; this.draw();
                 }
             }
-            function initParticles() {
+            
+            window.initParticles = function() {
                 particles = [];
-                const particleColor = 'rgba(0, 123, 255, 0.5)';
+                const particleColor = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0, 123, 255, 0.5)' : 'rgba(0, 123, 255, 0.3)';
                 let num = (particleCanvas.height * particleCanvas.width) / 9000;
                 for (let i = 0; i < num; i++) {
                     let size = (Math.random() * 2) + 1;
@@ -838,12 +908,14 @@
                     particles.push(new Particle(x, y, dX, dY, size, particleColor));
                 }
             }
+
             function animateParticles() {
-                requestAnimationFrame(animateParticles);
+                animationFrameId = requestAnimationFrame(animateParticles);
                 particleCtx.clearRect(0, 0, innerWidth, innerHeight);
                 particles.forEach(p => p.update());
                 connectParticles();
             }
+
             function connectParticles() {
                 const rgb = '0, 123, 255';
                 for (let a = 0; a < particles.length; a++) {
@@ -861,6 +933,7 @@
                     }
                 }
             }
+            
             initParticles();
             animateParticles();
         }
